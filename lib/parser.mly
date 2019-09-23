@@ -6,11 +6,13 @@
 %token PLUS MINUS TIMES DIV
 %token LPAREN RPAREN
 %token AND OR NOT
+%token GT LT GTEQ LTEQ EQEQ NOTEQ
 %token EOL
 
 %left PLUS MINUS
 %left TIMES DIV
 %left AND OR
+%left GT LT GTEQ LTEQ EQEQ NOTEQ
 %nonassoc UMINUS
 %nonassoc UNOT
 
@@ -34,3 +36,9 @@ expr:
     | expr OR expr { Syntax.Or ($1, $3) }
     | NOT expr %prec UNOT { Syntax.Not $2 }
     | MINUS expr %prec UMINUS { Syntax.Negate $2 }
+    | expr GT expr { Syntax.GT ($1, $3) }
+    | expr LT expr { Syntax.LT ($1, $3) }
+    | expr GTEQ expr { Syntax.GTEQ ($1, $3) }
+    | expr LTEQ expr { Syntax.LTEQ ($1, $3) }
+    | expr EQEQ expr { Syntax.EQEQ ($1, $3) }
+    | expr NOTEQ expr { Syntax.NOTEQ ($1, $3) }

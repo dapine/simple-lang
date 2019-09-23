@@ -18,4 +18,10 @@ rule token = parse
     | "and" { AND }
     | "or" { OR }
     | "not" { NOT }
+    | '>' { GT }
+    | '<' { LT }
+    | ">=" { GTEQ }
+    | "<=" { LTEQ }
+    | "==" { EQEQ }
+    | "!=" { NOTEQ }
     | eof { raise Eof }
